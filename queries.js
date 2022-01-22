@@ -4,7 +4,13 @@ const pool = new Pool({
     host: 'ec2-34-199-200-115.compute-1.amazonaws.com',
     database: 'd5p56eeakn04h7',
     password: 'd2896fc6a8e194bfb3e4897b5d28640057f93ab2aa39ae5425b58d4b358106cc',
-    port: 5432
+    port: 5432,
+    ssl: {
+        rejectUnauthorized: false,
+        ca: fs.readFileSync('/path/to/server-certificates/root.crt').toString(),
+        key: fs.readFileSync('/path/to/client-key/postgresql.key').toString(),
+        cert: fs.readFileSync('/path/to/client-certificates/postgresql.crt').toString(),
+      },
 });
 
 const login = (req,res) => {
